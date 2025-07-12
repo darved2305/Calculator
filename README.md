@@ -1,6 +1,6 @@
 # Calculator
 
-A modern calculator built using HTML, CSS, and JavaScript. It features a responsive layout, animated starry background, theme toggle, and glowing UI effects. Supports full keyboard input for seamless calculations and includes error handling for divide-by-zero cases.
+A modern calculator built using HTML, CSS, and JavaScript. It features a responsive layout, animated starry background, theme toggle, and glowing effects. Supports full keyboard input for seamless calculations and includes error handling for divide-by-zero cases.
 
 ---
 
