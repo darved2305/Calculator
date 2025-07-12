@@ -1,0 +1,296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+.star:nth-child(odd) {
+    animation-delay: 1s;
+}
+
+.star:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.calculator-container {
+    background: rgba(15, 15, 35, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.calculator-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 0, 255, 0.03), transparent, rgba(0, 255, 255, 0.03));
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ff0080, #8000ff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 2s ease-in-out infinite, bounce 1s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.display {
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
+    border-radius: 15px;
+    color: white;
+    font-size: 2rem;
+    text-align: right;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.3),
+                0 0 20px rgba(255, 0, 255, 0.3);
+    animation: displayGlow 2s ease-in-out infinite alternate;
+    font-family: 'Courier New', monospace;
+}
+
+@keyframes displayGlow {
+    from { box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.3), 0 0 20px rgba(255, 0, 255, 0.3); }
+    to { box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.5); }
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.btn {
+    height: 70px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    font-family: 'Courier New', monospace;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+}
+
+.btn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.number {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 200, 255, 0.3));
+    color: white;
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.number:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.operator {
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(255, 0, 150, 0.3));
+    color: white;
+    border: 1px solid rgba(255, 0, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.operator:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+.equals {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.3), rgba(255, 215, 0, 0.4));
+    color: white;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    grid-column: span 2;
+}
+
+.equals:hover {
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+    transform: translateY(-2px);
+}
+
+.clear {
+    background: linear-gradient(135deg, rgba(255, 50, 50, 0.3), rgba(255, 100, 100, 0.4));
+    color: white;
+    border: 1px solid rgba(255, 50, 50, 0.5);
+    box-shadow: 0 0 15px rgba(255, 50, 50, 0.4);
+}
+
+.clear:hover {
+    box-shadow: 0 0 25px rgba(255, 50, 50, 0.7);
+    transform: translateY(-2px);
+}
+
+/* Dark Theme */
+.dark-theme {
+    background: #000000;
+}
+
+.dark-theme .background-animation {
+    background: radial-gradient(ellipse at bottom, #0f1419 0%, #000000 100%);
+}
+
+.dark-theme .calculator-container {
+    background: rgba(5, 5, 15, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .display {
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.3),
+                0 0 20px rgba(255, 255, 0, 0.3);
+    animation: darkDisplayGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes darkDisplayGlow {
+    from { box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.3), 0 0 20px rgba(255, 255, 0, 0.3); }
+    to { box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.5), 0 0 30px rgba(255, 255, 0, 0.5); }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .display {
+        height: 60px;
+        font-size: 1.5rem;
+        padding: 15px;
+    }
+    
+    .btn {
+        height: 60px;
+        font-size: 1rem;
+    }
+    
+    .buttons {
+        gap: 10px;
+    }
+}
